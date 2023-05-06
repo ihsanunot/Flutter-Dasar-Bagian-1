@@ -4,6 +4,14 @@
 
 Flutter Basic untuk Pemula, nanti nya akan saya pelajari dasar nya, dan saya coba pisah ke branch nya.
 
+## pre-installs:
+- Android SDK
+- Dart SDK
+- Flutter SDK
+- Jdk & Jre
+- Visual Studio Code
+
+
 ## Untuk Jalanin nya :
 - Status Bar kanan pojok bawah
 - pilih perangkat area device selector
@@ -35,9 +43,9 @@ flutter run -d chrome --web-renderer canvaskit
 ---
 
 **Cek Perubahan pada aplikasi:**
-Hot reload
-Hot restart
-Full restart (mengkompilasi kode dari awal)
+- Hot reload
+- Hot restart
+- Full restart (mengkompilasi kode dari awal)
 
 Kasus spesial (Error):
 - Aplikasi mati atau keluar
