@@ -38,14 +38,14 @@ Hot restart
 Full restart (mengkompilasi kode dari awal)
 
 Kasus spesial (Error):
-Aplikasi mati atau keluar
-Compilation errors
-CupertinoTabView’s builder
-Tipe enum
-Perubahan font
-Generic types
-Native code
-State sebelumnya dikombinasikan dengan kode baru
+- Aplikasi mati atau keluar
+- Compilation errors
+- CupertinoTabView’s builder
+- Tipe enum
+- Perubahan font
+- Generic types
+- Native code
+- State sebelumnya dikombinasikan dengan kode baru
 
 **Ihsanunot** (flutter_dasar_dcg)
 
