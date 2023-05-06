@@ -2,50 +2,24 @@
 
 Flutter Basic untuk Pemula, nanti nya akan saya pelajari dasar nya, dan saya coba pisah ke branch nya.
 
-## Untuk Jalanin nya :
-- Status Bar kanan pojok bawah
-- pilih perangkat area device selector
-- Jika no device bisa buka emulator nya dulu
-- Aktifkan Command line :
-Run > Start Debugging (atau tekan F5)
-- Tunggu Proses selesai
-- Setelah selesai maka langsung muncul kode starter nya flutter
-- atau bisa juga ketik *flutter create* di terminal
-
-### Untuk Jalanin di Web/Browser
-
-- Tinggal ketik di terminal :
-flutter config --enable-web
-flutter create .
-flutter run -d chrome
-
-*sintaks diatas jika anda pakai vscode*
-
-Flutter Web :
-- HTML renderer
-- CanvasKit renderer
-
-Bisa juga kalau mau pilih secara spesifik:
-
-flutter run -d chrome --web-renderer html
-flutter run -d chrome --web-renderer canvaskit
-
 ---
 
-**Cek Perubahan pada aplikasi:**
-Hot reload
-Hot restart
-Full restart (mengkompilasi kode dari awal)
+**Struktur Data:**
 
-Kasus spesial (Error):
-Aplikasi mati atau keluar
-Compilation errors
-CupertinoTabView’s builder
-Tipe enum
-Perubahan font
-Generic types
-Native code
-State sebelumnya dikombinasikan dengan kode baru
+android/
+Folder ini merupakan tempat Anda untuk mengatur konfigurasi untuk aplikasi android. Di dalamnya terdapat file gradle, AndroidManifest, dan lain-lain.
+
+ios/
+Sama halnya dengan folder android, hanya saja ini untuk iOS.
+
+build/
+Ketika Anda melakukan build project flutter, hasil build akan ada pada folder ini.
+
+lib/
+Ini merupakan folder utama ketika Anda mengerjakan project flutter. Seluruh source code flutter Anda akan berada pada folder ini.
+
+test/
+Folder ini tempat Anda menyimpan source code testing.
 
 **Ihsanunot** (flutter_dasar_dcg)
 
