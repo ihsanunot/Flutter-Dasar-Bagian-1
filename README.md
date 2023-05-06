@@ -32,6 +32,8 @@ Bahkan aplikasi Flutter itu sendiri merupakan sebuah widget.
 
 Pada kode contoh  di atas **(file main.dart)**, kelas MyApp, yang merupakan widget, mengembalikan atau menampilkan widget MaterialApp.
 
+
+
 MaterialApp adalah widget bawaan Flutter yang akan menjadi fondasi dari aplikasi
 
 **Use Cases:**
@@ -44,10 +46,11 @@ rute untuk navigasi antar halaman, dan lain-lain.
 Dengan Scaffold Anda dapat mengatur App Bar, Floating Action Button, Drawer, dan lain-lain.
 
 Referensi:
-https://api.flutter.dev/flutter/material/MaterialApp-class.html
-https://api.flutter.dev/flutter/material/Scaffold-class.html
-https://api.flutter.dev/flutter/widgets/Center-class.html
-https://api.flutter.dev/flutter/widgets/Text-class.html
+- https://api.flutter.dev/flutter/material/MaterialApp-class.html
+- https://api.flutter.dev/flutter/material/Scaffold-class.html
+- https://api.flutter.dev/flutter/widgets/Center-class.html
+- https://api.flutter.dev/flutter/widgets/Text-class.html
+
 
 
 ### Package Manager
@@ -65,6 +68,7 @@ Di VSCode tinggal save aja, nanti **pub get** nya akan otomatis dijalankan.
 Bisa juga manual, dengan sintaks:
 
 > flutter pub get
+
 
 **Simbol tanda caret (^) berarti:**
 gunakan versi  terbaru yang benar dari versi yang  ditentukan. 
@@ -88,11 +92,6 @@ dependencies:
 ```
 
 
-
-
-
-
----
 ---
 **Ihsanunot** (flutter_dasar_dcg)
 
