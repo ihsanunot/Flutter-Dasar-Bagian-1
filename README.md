@@ -25,6 +25,7 @@ Folder ini tempat Anda menyimpan source code testing.
 
 main() kode dasar nya untuk menjalankan runApp, runApp akan memanggil MyApp()
 
+
 *Catatan*
 
 Setiap komponen di dalam Flutter terdiri dari widget. 
