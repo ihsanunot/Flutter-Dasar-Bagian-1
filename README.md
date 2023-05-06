@@ -1,5 +1,7 @@
 # Belajar Flutter Dasar
 
+![flutter](https://user-images.githubusercontent.com/127992374/236629078-881b9932-d7b0-4b9d-9eb0-11e9f323b19a.jpg)
+
 Flutter Basic untuk Pemula, nanti nya akan saya pelajari dasar nya, dan saya coba pisah ke branch nya.
 
 ## Untuk Jalanin nya :
