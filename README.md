@@ -237,10 +237,17 @@ Column(
 
 Untuk memahami Row, Column, dan bagaimana menyusun layout dengan Flutter secara mendalam, silakan pelajari dokumentasi berikut:
 
-[IMG]
+![contoh row aligment](https://user-images.githubusercontent.com/127992374/236868812-699e6a9a-b3f2-45f3-ad6a-ecdb9be14395.jpeg)
+
+![1](https://user-images.githubusercontent.com/127992374/236868844-407334eb-fdb5-4083-8195-50f8173f2750.png)
+![2](https://user-images.githubusercontent.com/127992374/236868871-745518f5-4aa7-4d3f-9166-fb755352ce20.png)
+
 
 ## Referensi:
 
 - https://api.flutter.dev/flutter/widgets/Row-class.html
 - https://api.flutter.dev/flutter/widgets/Column-class.html
 - https://flutter.dev/docs/development/ui/layout
+
+Terimakasih,
+Ihsanunot
