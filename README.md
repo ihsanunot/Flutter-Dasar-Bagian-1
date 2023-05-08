@@ -4,6 +4,8 @@
 
 Flutter Basic untuk Pemula, Silahkan Cek **Branch** nya untuk contoh koding dan use cases nya.
 
+### Silakan Check Branch nya untuk bahan pembelajaran
+
 ## pre-installs:
 - Android SDK
 - Dart SDK
