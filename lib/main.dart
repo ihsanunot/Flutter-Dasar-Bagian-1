@@ -50,8 +50,29 @@ class HalamanPertama extends StatelessWidget {
           onPressed: () {},
         ),
       ),
-      body: const Center(
-        child: Text('Hello Flutter'),
+      body: Container(
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: Colors.red,
+          border: Border.all(color: Colors.green, width: 6),
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.black,
+              offset: Offset(3, 6),
+              blurRadius: 10,
+            ),
+          ],
+        ),
+        width: 250,
+        height: 250,
+        padding: const EdgeInsets.all(10),
+        margin: const EdgeInsets.all(10),
+        color: Colors.blue,
+        child: const Text(
+          'Cheers Ayana',
+          style: TextStyle(fontSize: 48),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},

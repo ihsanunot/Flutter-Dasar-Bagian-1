@@ -1,89 +1,246 @@
-# Widget Umum di Flutter
+# Container di Flutter
 
-**Scaffold**
+Container adalah widget yang digunakan untuk styling, membuat sebuah shape (bentuk) layout pada widget child-nya. 
 
-Scaffold merupakan sebuah widget yang digunakan untuk membuat tampilan dasar material design.
+Contoh:
 
-yang merupakan halaman dasar aplikasi Flutter.
+```
+Container(
+  color: Colors.blue,
+  child: const Text(
+    'Hi', 
+    style: TextStyle(fontSize: 40),
+  ),
+),
+```
 
-**Widget Umum di Scaffold:**
-- AppBar
-- Body
-- FloatingActionButton
+Container ini single children jadi hanya bisa pakai 1 children saja.
 
-Bisa juga di dalam method build kita panggil Scaffold.
-di dalam method build kita bisa panggil Scaffold.
+Container bisa di taru di dalam Parameter **body Scaffold.**
+
+--- 
+
+### Width & Height
+
+Kita dapat mengatur lebar (width) & tinggi (height)
+
+Contoh:
+
+```
+Container(
+  color: Colors.blue,
+  width: 200,
+  height: 100,
+  child: const Text(
+    'Hi', 
+    style: TextStyle(fontSize: 40),
+  ),
+),
+```
 
 ---
 
-**AppBar**
+### Padding & Margin
 
- AppBar merupakan Header (bagian paling atas) aplikasi atau biasa dikenal dengan toolbar.
+ **Padding** merupakan jarak antara konten (child) dengan Container, sedangkan **margin** merupakan jarak antara Container dengan bagian luar container.
 
- Pada AppBar umumnya terdapat **judul dan ActionButton.**
+Contoh:
 
-Nah di dalam scaffold kita tambahkan appbar lalu AppBar di dalam AppBar nya masukin title, tapi tidak hanya title saja, kita juga bisa menambahkan beberapa widget lain nya di dalam AppBar.
+```
+Container(
+  color: Colors.blue,
+  padding: const EdgeInsets.all(10),
+  margin: const EdgeInsets.all(10), 
+  child: const Text(
+    'Hi', 
+    style: TextStyle(fontSize: 40),
+  ),
+),
+```
+
+EdgeInsets.all(10) artinya tiap sisi top bottom left right nya di setting di 10px jarak nya.
+
+---
+
+## Dekorasi Container
+
+Decoration merupakan bagian dari Container untuk styling.
+
+Pada decoration kita dapat menentukan :
+
+* Warna background (solid/gradient color)
+* Shadow 
+* Border
+* Border radius (membulatkan sudut)
+* Mengatur shape (bentuk)
+* Dan lain-lain.
+
+**Color**
+
+Contoh:
+```
+Container(
+  decoration: BoxDecoration(
+    color: Colors.red,
+  ),
+  child: const Text(
+    'Hi', 
+    style: TextStyle(fontSize: 40),
+  ),
+),
+```
+
+Untuk menggunakan decoration cukup menambahkan parameter decoration pada Container lalu beri nilai BoxDecoration.
+
+**Shape**
+
+Contoh:
+```
+Container(
+  decoration: BoxDecoration(
+    color: Colors.red,
+    shape: BoxShape.circle,
+  ),
+  child: const Text(
+    'Hi', 
+    style: TextStyle(fontSize: 40),
+  ),
+),
+```
+
+Pada kode di atas kita menambahkan parameter shape dengan nilai BoxShape.circle. 
+
+BoxShape memiliki opsi circle atau rectangle.
+
+**Shadow**
+
+Untuk menambahkan shadow pada Container kita akan menambahkan parameter boxShadow pada BoxDecoration, seperti berikut:
+
+```
+Container(
+  decoration: BoxDecoration(
+    color: Colors.red,
+    boxShadow: const [
+      BoxShadow(
+        color: Colors.black,
+        offset: Offset(3, 6),
+        blurRadius: 10,
+      ),
+    ],
+  ),
+  child: const Text(
+    'Hi', 
+    style: TextStyle(fontSize: 40),
+  ),
+),
+```
+
+**Border**
+Border merupakan batas garis dengan content (child).
 
 Contoh :
 
- ```
-return Scaffold(
-      appBar: AppBar(
-        title: const Text('Halaman Pertama'),
-        actions: <Widget>[
-          IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.search,
-                color: Colors.white,
-              ))
-        ],
-      ),
-    );
- ```
+```
+Container(
+  decoration: BoxDecoration(
+    color: Colors.red,
+    border: Border.all(color: Colors.green, width: 3),
+  ),
+  child: const Text(
+    'Hi', 
+    style: TextStyle(fontSize: 40),
+  ),
+),
+```
 
- kode di atas kita tambahin *actions*, kita juga menampilkan menu (Drawer).
+**Padding**
+Padding merupakan sebuah widget yang khusus untuk memberikan padding pada suatu widget.
 
- kita juga bisa menambahkan action lagi di bagian kiri AppBar
+> Padding harus memiliki child
 
- * Ingat masih di dalam actions, tapi tambahin colon dan setelah array [] biar gak bingung.
+Parameter padding ditambahkan untuk menentukan besaran padding yang diinginkan.
+
+**Center**
+Widget Center merupakan sebuah widget yang digunakan untuk membuat suatu widget berada pada posisi tengah.
+
+### Referensi Penting :
+* https://api.flutter.dev/flutter/widgets/Container-class.html
+* https://api.flutter.dev/flutter/widgets/Padding-class.html
+
+--- 
+
+# Row dan Column
+
+Widget Row merupakan suatu widget yang digunakan untuk membuat widget-widget tersusun berjajar secara horizontal.
 
 
- - Setiap Tombol wajib ada 'onPressed: () {}' nya.
+## Row
 
- * *leading hanya dapat menampung satu widget saja.*
+```
+Row(
+  children: <Widget>[
+    //di sini berisi widget-widget
+  ],
+)
+```
 
- - Secara default, **leading** akan berisi tombol untuk kembali ke halaman sebelumnya atau tombol untuk menu drawer.
+Untuk membuat widget-widget berjajar secara horizontal kita harus memasukkan widget-widget tersebut ke dalam parameter children. 
 
- ---
+Parameter children berisi kumpulan atau list dari widget 
+karena kita dapat menyusun beberapa widget sekaligus di dalamnya. 
 
- **Body**
+Jika mengacu pada contoh tombol-tombol di atas kodenya seperti berikut:
 
- Body adalah bagian utama dari Scaffold, akan banyak menuliskan kode pada bagian body ini.
 
- Untuk implementasi body kita akan menambahkan parameter body pada Scaffold.
+```
+Row(
+  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  children: const <Widget>[
+    Icon(Icons.share),
+    Icon(Icons.thumb_up),
+    Icon(Icons.thumb_down),
+  ],
+)
+```
 
- Contoh :
+Kita menambahkan pula mainAxisAlignment yang merupakan parameter alignment pada Row.
 
- ```
-         body: const Center(
-          child: Text('Hello Flutter'),
-        ),
- ```
+Parameter mainAxisAlignment yang berfungsi untuk mengatur alignment horizontal dari Row (alignment utama).
 
- Ingat harus di dalam block Scaffold nya.
 
- ---
 
- **FloatingActionButton**
-
- FloatingActionButton ini merupakan bagian dari Scaffold yang digunakan untuk menampilkan sebuah tombol aksi yang posisinya floating (melayang dan posisinya tetap).
-
- ### Untuk memahami Scaffold lebih dalam, Check :
+ Selain itu Row juga memiliki parameter crossAxisAlignment yang berfungsi untuk mengatur alignment secara vertikal. 
  
- * https://api.flutter.dev/flutter/material/Scaffold-class.html
-
-* https://flutter.dev/docs/catalog/samples/Scaffold
+ Kedua parameter ini juga berlaku sebaliknya untuk widget Column.
 
 ---
 
+## Column
+
+Column merupakan suatu widget yang digunakan untuk membuat widget-widget tersusun berjajar secara vertikal.
+
+Contoh :
+```
+Column(
+  children: const <Widget>[
+    Text(
+      'Sebuah Judul',
+      style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+    ),
+    Text('Lorem ipsum dolor sit amet'),
+  ],
+)
+```
+
+---
+
+
+Untuk memahami Row, Column, dan bagaimana menyusun layout dengan Flutter secara mendalam, silakan pelajari dokumentasi berikut:
+
+[IMG]
+
+## Referensi:
+
+- https://api.flutter.dev/flutter/widgets/Row-class.html
+- https://api.flutter.dev/flutter/widgets/Column-class.html
+- https://flutter.dev/docs/development/ui/layout
