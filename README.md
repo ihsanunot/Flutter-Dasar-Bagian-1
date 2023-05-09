@@ -1,246 +1,49 @@
-# Container di Flutter
+# Belajar Dasar Flutter (Bagian 2)
 
-Container adalah widget yang digunakan untuk styling, membuat sebuah shape (bentuk) layout pada widget child-nya. 
+Belajar flutter sederhana basic to basic.
 
-Contoh:
 
-```
-Container(
-  color: Colors.blue,
-  child: const Text(
-    'Hi', 
-    style: TextStyle(fontSize: 40),
-  ),
-),
-```
+## Button
 
-Container ini single children jadi hanya bisa pakai 1 children saja.
+Widget button ini adalah widget yang dapat menerima trigger sentuhan atau dapat melakukan 
+suatu fungsi ketika disentuh.
 
-Container bisa di taru di dalam Parameter **body Scaffold.**
+**ElevatedButton**
 
---- 
+ElevatedButton memiliki 2 parameter yaitu onPressed dan child.
 
-### Width & Height
+**TextButton**
 
-Kita dapat mengatur lebar (width) & tinggi (height)
+TextButton merupakan widget button yang memiliki tampilan yang polos selayaknya Text. TextButton umumnya digunakan pada toolbars, dialog, atau bersama komponen button lain.
 
-Contoh:
+**OutlinedButton**
 
-```
-Container(
-  color: Colors.blue,
-  width: 200,
-  height: 100,
-  child: const Text(
-    'Hi', 
-    style: TextStyle(fontSize: 40),
-  ),
-),
-```
+OutlinedButton umumnya digunakan untuk tombol atau aksi yang penting, tetapi bukan aksi utama dalam aplikasi.
 
----
+**IconButton**
 
-### Padding & Margin
+IconButton merupakan widget button dengan icon. Tak seperti widget tombol lainnya, widget IconButton ini tidak memiliki child.
 
- **Padding** merupakan jarak antara konten (child) dengan Container, sedangkan **margin** merupakan jarak antara Container dengan bagian luar container.
+IconButton tidak menggunakan child untuk isi (content) melainkan menggunakan parameter icon dan tooltip (penunjuk) untuk memberikan hint pada tombol.
 
-Contoh:
+**DropdownButton**
 
-```
-Container(
-  color: Colors.blue,
-  padding: const EdgeInsets.all(10),
-  margin: const EdgeInsets.all(10), 
-  child: const Text(
-    'Hi', 
-    style: TextStyle(fontSize: 40),
-  ),
-),
-```
+DropdownButton merupakan tombol yang saat diklik, akan muncul pop-up daftar beberapa item yang dapat kita pilih salah satu.
 
-EdgeInsets.all(10) artinya tiap sisi top bottom left right nya di setting di 10px jarak nya.
+> Yang dropdown saya coba contoh nya ada di dalam folder contoh_dropdown
+Sisa nya langsung ada di main.dart nya
+
+
+**Disini saya pakai :**
+
+> const SizedBox(height: 16)
+
+Untuk mengatur jarak antar tombol nya.
+
+
+**Referensi :**
+* https://flutter.dev/docs/development/ui/widgets/material#Buttons
 
 ---
 
-## Dekorasi Container
-
-Decoration merupakan bagian dari Container untuk styling.
-
-Pada decoration kita dapat menentukan :
-
-* Warna background (solid/gradient color)
-* Shadow 
-* Border
-* Border radius (membulatkan sudut)
-* Mengatur shape (bentuk)
-* Dan lain-lain.
-
-**Color**
-
-Contoh:
-```
-Container(
-  decoration: BoxDecoration(
-    color: Colors.red,
-  ),
-  child: const Text(
-    'Hi', 
-    style: TextStyle(fontSize: 40),
-  ),
-),
-```
-
-Untuk menggunakan decoration cukup menambahkan parameter decoration pada Container lalu beri nilai BoxDecoration.
-
-**Shape**
-
-Contoh:
-```
-Container(
-  decoration: BoxDecoration(
-    color: Colors.red,
-    shape: BoxShape.circle,
-  ),
-  child: const Text(
-    'Hi', 
-    style: TextStyle(fontSize: 40),
-  ),
-),
-```
-
-Pada kode di atas kita menambahkan parameter shape dengan nilai BoxShape.circle. 
-
-BoxShape memiliki opsi circle atau rectangle.
-
-**Shadow**
-
-Untuk menambahkan shadow pada Container kita akan menambahkan parameter boxShadow pada BoxDecoration, seperti berikut:
-
-```
-Container(
-  decoration: BoxDecoration(
-    color: Colors.red,
-    boxShadow: const [
-      BoxShadow(
-        color: Colors.black,
-        offset: Offset(3, 6),
-        blurRadius: 10,
-      ),
-    ],
-  ),
-  child: const Text(
-    'Hi', 
-    style: TextStyle(fontSize: 40),
-  ),
-),
-```
-
-**Border**
-Border merupakan batas garis dengan content (child).
-
-Contoh :
-
-```
-Container(
-  decoration: BoxDecoration(
-    color: Colors.red,
-    border: Border.all(color: Colors.green, width: 3),
-  ),
-  child: const Text(
-    'Hi', 
-    style: TextStyle(fontSize: 40),
-  ),
-),
-```
-
-**Padding**
-Padding merupakan sebuah widget yang khusus untuk memberikan padding pada suatu widget.
-
-> Padding harus memiliki child
-
-Parameter padding ditambahkan untuk menentukan besaran padding yang diinginkan.
-
-**Center**
-Widget Center merupakan sebuah widget yang digunakan untuk membuat suatu widget berada pada posisi tengah.
-
-### Referensi Penting :
-* https://api.flutter.dev/flutter/widgets/Container-class.html
-* https://api.flutter.dev/flutter/widgets/Padding-class.html
-
---- 
-
-# Row dan Column
-
-Widget Row merupakan suatu widget yang digunakan untuk membuat widget-widget tersusun berjajar secara horizontal.
-
-
-## Row
-
-```
-Row(
-  children: <Widget>[
-    //di sini berisi widget-widget
-  ],
-)
-```
-
-Untuk membuat widget-widget berjajar secara horizontal kita harus memasukkan widget-widget tersebut ke dalam parameter children. 
-
-Parameter children berisi kumpulan atau list dari widget 
-karena kita dapat menyusun beberapa widget sekaligus di dalamnya. 
-
-Jika mengacu pada contoh tombol-tombol di atas kodenya seperti berikut:
-
-
-```
-Row(
-  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  children: const <Widget>[
-    Icon(Icons.share),
-    Icon(Icons.thumb_up),
-    Icon(Icons.thumb_down),
-  ],
-)
-```
-
-Kita menambahkan pula mainAxisAlignment yang merupakan parameter alignment pada Row.
-
-Parameter mainAxisAlignment yang berfungsi untuk mengatur alignment horizontal dari Row (alignment utama).
-
-
-
- Selain itu Row juga memiliki parameter crossAxisAlignment yang berfungsi untuk mengatur alignment secara vertikal. 
- 
- Kedua parameter ini juga berlaku sebaliknya untuk widget Column.
-
----
-
-## Column
-
-Column merupakan suatu widget yang digunakan untuk membuat widget-widget tersusun berjajar secara vertikal.
-
-Contoh :
-```
-Column(
-  children: const <Widget>[
-    Text(
-      'Sebuah Judul',
-      style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-    ),
-    Text('Lorem ipsum dolor sit amet'),
-  ],
-)
-```
-
----
-
-
-Untuk memahami Row, Column, dan bagaimana menyusun layout dengan Flutter secara mendalam, silakan pelajari dokumentasi berikut:
-
-[IMG]
-
-## Referensi:
-
-- https://api.flutter.dev/flutter/widgets/Row-class.html
-- https://api.flutter.dev/flutter/widgets/Column-class.html
-- https://flutter.dev/docs/development/ui/layout
+**Ihsanunot** (flutter_dasar_dcg)
