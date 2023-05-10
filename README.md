@@ -2,47 +2,79 @@
 
 Belajar flutter sederhana basic to basic.
 
+## Input Widget
 
-## Button
+input pengguna ini berkaitan dengan state yang dapat sering berubah. 
+Karena itu umumnya input widget akan ditempatkan di dalam StatefulWidget.
 
-Widget button ini adalah widget yang dapat menerima trigger sentuhan atau dapat melakukan 
-suatu fungsi ketika disentuh.
+**TextField**
 
-**ElevatedButton**
+TextField merupakan sebuah widget yang digunakan untuk menerima input berupa teks yang berasal dari keyboard.
+Dan ada banyak cara dalam membuat textfied bisa cek di docs langsung atau bisa dari youtube dll.
 
-ElevatedButton memiliki 2 parameter yaitu onPressed dan child.
+Parameter :
+Parameter **onChanged**
 
-**TextButton**
+Function :
+fungsi **setState()**
 
-TextButton merupakan widget button yang memiliki tampilan yang polos selayaknya Text. TextButton umumnya digunakan pada toolbars, dialog, atau bersama komponen button lain.
+Jika Anda tidak ingin mengambil nilai setiap perubahan, tetapi hanya ketika seluruh input sudah selesai di-submit, Anda dapat menggunakan parameter **onSubmitted**.
 
-**OutlinedButton**
+Cara lain yang bisa kita gunakan adalah dengan TextEditingController. Dengan controller, kita cukup membuat variabel TextEditingController lalu menambahkannya ke widget TextField.
 
-OutlinedButton umumnya digunakan untuk tombol atau aksi yang penting, tetapi bukan aksi utama dalam aplikasi.
+Ketika menggunakan controller, pastikan untuk menghapus controller ketika halaman atau widget sudah tidak digunakan. Ini bertujuan supaya tidak menimbulkan kebocoran memori (memory leak).
 
-**IconButton**
+Contoh :
 
-IconButton merupakan widget button dengan icon. Tak seperti widget tombol lainnya, widget IconButton ini tidak memiliki child.
+```
+@override
+void dispose() {
+  _controller.dispose();
+  super.dispose();
+}
 
-IconButton tidak menggunakan child untuk isi (content) melainkan menggunakan parameter icon dan tooltip (penunjuk) untuk memberikan hint pada tombol.
+```
 
-**DropdownButton**
+**Switch**
 
-DropdownButton merupakan tombol yang saat diklik, akan muncul pop-up daftar beberapa item yang dapat kita pilih salah satu.
+Switch merupakan inputan yang mengembalikan nilai boolean true atau false.
 
-> Yang dropdown saya coba contoh nya ada di dalam folder contoh_dropdown
-Sisa nya langsung ada di main.dart nya
+**Radio**
 
+Radio merupakan inputan yang digunakan untuk memilih salah satu dari beberapa pilihan dalam suatu kelompok.
 
-**Disini saya pakai :**
+**Checkbox**
 
-> const SizedBox(height: 16)
+Checkbox merupakan inputan benar atau salah. 
+Checkbox akan berisi centang jika nilainya adalah benar dan kosong jika salah. 
 
-Untuk mengatur jarak antar tombol nya.
+## Saran
+
+Agar mempermudah saya buat folder baru bernama widget yang isi nya adalah widget widget input text switch input, etc.
+
+Lalu tinggal kita import aja widget kita ke lib/main.dart
+```
+import 'widget/input_text.dart';
+import 'widget/switch_input.dart';
+import 'widget/radio_input.dart';
+import 'widget/checkbox_input.dart';
+```
+
+Lalu tinggal taruh saja widget nya :
+SingleChildScrollView -> child -> Column -> children[]
+
+didalam childer[] kita akan masukin widget widget nya.
 
 
 **Referensi :**
-* https://flutter.dev/docs/development/ui/widgets/material#Buttons
+
+* https://api.flutter.dev/flutter/material/ListTile-class.html
+
+* https://api.flutter.dev/flutter/material/AppBar/leading.html
+
+* https://api.flutter.dev/flutter/material/Radio-class.html
+
+* https://api.flutter.dev/flutter/material/Checkbox-class.html
 
 ---
 
