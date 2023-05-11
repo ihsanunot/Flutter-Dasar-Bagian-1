@@ -2,79 +2,66 @@
 
 Belajar flutter sederhana basic to basic.
 
-## Input Widget
+## Image
 
-input pengguna ini berkaitan dengan state yang dapat sering berubah. 
-Karena itu umumnya input widget akan ditempatkan di dalam StatefulWidget.
+Mari kita coba menampilkan gambar dari internet dan juga project asset.
 
-**TextField**
+**Image.network**
 
-TextField merupakan sebuah widget yang digunakan untuk menerima input berupa teks yang berasal dari keyboard.
-Dan ada banyak cara dalam membuat textfied bisa cek di docs langsung atau bisa dari youtube dll.
+Untuk gambar dari internet pakai method ini ;
 
-Parameter :
-Parameter **onChanged**
-
-Function :
-fungsi **setState()**
-
-Jika Anda tidak ingin mengambil nilai setiap perubahan, tetapi hanya ketika seluruh input sudah selesai di-submit, Anda dapat menggunakan parameter **onSubmitted**.
-
-Cara lain yang bisa kita gunakan adalah dengan TextEditingController. Dengan controller, kita cukup membuat variabel TextEditingController lalu menambahkannya ke widget TextField.
-
-Ketika menggunakan controller, pastikan untuk menghapus controller ketika halaman atau widget sudah tidak digunakan. Ini bertujuan supaya tidak menimbulkan kebocoran memori (memory leak).
+> Image.network(url)
 
 Contoh :
 
 ```
-@override
-void dispose() {
-  _controller.dispose();
-  super.dispose();
-}
-
+Image.network(
+          'https://picsum.photos/200/300',
+          width: 200,
+          height: 200,),
 ```
 
-**Switch**
+**Image.asset**
 
-Switch merupakan inputan yang mengembalikan nilai boolean true atau false.
+Selain melalui internet, kita juga dapat menampilkan gambar yang bersumber dari asset project.
 
-**Radio**
+Asset harus di daftarkan di pubspec, Untuk mendaftarkan asset gambar pada project kita harus menambahkannya pada berkas pubspec.yaml.
 
-Radio merupakan inputan yang digunakan untuk memilih salah satu dari beberapa pilihan dalam suatu kelompok.
+Pertama kita harus tau dulu ini gambar yang mau di masukkan ber format apa? JPEG, PNG, GIF, Animated GIF, WebP, Animated WebP, BMP, dan WBMP?
 
-**Checkbox**
+diluar itu Flutter akan memanfaatkan API dari masing-masing platform.
 
-Checkbox merupakan inputan benar atau salah. 
-Checkbox akan berisi centang jika nilainya adalah benar dan kosong jika salah. 
+bisa buat dulu folder images nya di folder project.
 
-## Saran
+Contoh mendaftarkan nya (pubspec.yaml):
 
-Agar mempermudah saya buat folder baru bernama widget yang isi nya adalah widget widget input text switch input, etc.
-
-Lalu tinggal kita import aja widget kita ke lib/main.dart
 ```
-import 'widget/input_text.dart';
-import 'widget/switch_input.dart';
-import 'widget/radio_input.dart';
-import 'widget/checkbox_input.dart';
+flutter:
+  uses-material-design: true
+ 
+  assets:
+    - images/android.png
 ```
 
-Lalu tinggal taruh saja widget nya :
-SingleChildScrollView -> child -> Column -> children[]
+Jika ingin menambahkan banyak gambar, kita lansung aja tambahin folder images/ nya ke dalam assets di pubspec nya.
 
-didalam childer[] kita akan masukin widget widget nya.
+```
+flutter:
+ 
+  uses-material-design: true
+ 
+  assets:
+    - images/
+```
 
+Lalu anda sudah bisa masukin gambar nya
 
-**Referensi :**
+> Image.asset(lokasi_asset)
 
-* https://api.flutter.dev/flutter/material/ListTile-class.html
+Referensi:
 
-* https://api.flutter.dev/flutter/material/AppBar/leading.html
+* https://api.flutter.dev/flutter/widgets/Image-class.html
 
-* https://api.flutter.dev/flutter/material/Radio-class.html
-
-* https://api.flutter.dev/flutter/material/Checkbox-class.html
 
 ---
 

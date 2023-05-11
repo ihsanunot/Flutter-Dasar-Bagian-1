@@ -17,3 +17,9 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets :
+    - images/
+ #  - images/android.png
+
+# untuk daftar folder images/ biar gak satu persatu kita daftarin gambar yang ingin kita masukan.
+# hati hati soal indentasi nya

@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'widget/input_text.dart';
-import 'widget/switch_input.dart';
-import 'widget/radio_input.dart';
-import 'widget/checkbox_input.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,49 +10,40 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Input Demo',
+      title: 'Contoh Gambar',
       theme: ThemeData(
         primaryColor: Colors.blue,
       ),
-      home: const HalamanDepan(),
+      home: const FotoGambar(),
     );
   }
 }
 
-class HalamanDepan extends StatefulWidget {
-  const HalamanDepan({Key? key}) : super(key: key);
+class FotoGambar extends StatelessWidget {
+  const FotoGambar({Key? key}) : super(key: key);
 
-  @override
-  State<HalamanDepan> createState() => _HalamanDepanState();
-}
-
-class _HalamanDepanState extends State<HalamanDepan> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('First Screen'),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          // isi bagian body atau input text nya
-          children: const <Widget>[
-            TextFieldContoh(),
-            SizedBox(height: 20),
-            SwitchInput(),
-            SizedBox(height: 20),
-            RadioWidget(),
-            SizedBox(height: 20),
-            CheckboxWidget(),
-            SizedBox(height: 20),
-          ],
+        appBar: AppBar(
+          title: const Text('Contoh Gambar'),
         ),
-      ),
-    );
+        body: Column(
+          children: [
+            Image.network(
+              'https://picsum.photos/200/300',
+              width: 200,
+              height: 200,
+            ),
+            const SizedBox(height: 30),
+            Image.asset(
+              "images/android.png",
+              width: 200,
+              height: 200,
+            ),
+          ],
+        ));
   }
 }
 
-
-//ihsanunot
+// route nya url/ lokasi aset pakai string
