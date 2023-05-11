@@ -2,66 +2,59 @@
 
 Belajar flutter sederhana basic to basic.
 
-## Image
+## Font
 
-Mari kita coba menampilkan gambar dari internet dan juga project asset.
+Untuk Menambahkan Font, anda bisa download terlebih dahulu font yang anda ingin pakai.
+Contoh disini saya akan download dari google fonts dan font nya yang Oswald.
 
-**Image.network**
+font ada dalam bagian flutter. Untuk mendaftarkan font, kita membuat bagian fonts yang ada dalam blok flutter.
+Untuk mendaftarkan font Oswald kita tuliskan Oswald pada bagian family yang nantinya akan menjadi nama font yang kita panggil pada kode dart.
 
-Untuk gambar dari internet pakai method ini ;
+Lalu dalam family kita masukkan fonts yang di dalamnya terdapat asset yang nanti akan mengarah pada file font.ttf
 
-> Image.network(url)
 
-Contoh :
-
-```
-Image.network(
-          'https://picsum.photos/200/300',
-          width: 200,
-          height: 200,),
-```
-
-**Image.asset**
-
-Selain melalui internet, kita juga dapat menampilkan gambar yang bersumber dari asset project.
-
-Asset harus di daftarkan di pubspec, Untuk mendaftarkan asset gambar pada project kita harus menambahkannya pada berkas pubspec.yaml.
-
-Pertama kita harus tau dulu ini gambar yang mau di masukkan ber format apa? JPEG, PNG, GIF, Animated GIF, WebP, Animated WebP, BMP, dan WBMP?
-
-diluar itu Flutter akan memanfaatkan API dari masing-masing platform.
-
-bisa buat dulu folder images nya di folder project.
-
-Contoh mendaftarkan nya (pubspec.yaml):
+Contoh seperti dibawah ini menambahkan asset fonts/oswald/Oswald-Regular.ttf ke dalam **pubspec.yaml**
 
 ```
-flutter:
-  uses-material-design: true
+  fonts:
+  - family: Oswald
+    fonts:
+      - asset: fonts/Oswald/Oswald-Regular.ttf
+```
+
+Setelah di daftarkan, kita langsung gunakan font nya, contoh bisa di Text()
+
+```
+Text(
+  'Custom Font',
+  style: TextStyle(
+    fontFamily: 'Oswald',
+    fontSize: 30,
+  ),
+),
+```
+
+Kita juga bisa merubah font default sesuai keinginan kita, contoh pakai font Oswald.
+
+**Contoh:**
+
+```
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
  
-  assets:
-    - images/android.png
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        fontFamily: 'Oswald',
+        primarySwatch: Colors.blue,
+      ),
+      home: FirstScreen(),
+    );
+  }
+}
 ```
-
-Jika ingin menambahkan banyak gambar, kita lansung aja tambahin folder images/ nya ke dalam assets di pubspec nya.
-
-```
-flutter:
- 
-  uses-material-design: true
- 
-  assets:
-    - images/
-```
-
-Lalu anda sudah bisa masukin gambar nya
-
-> Image.asset(lokasi_asset)
-
-Referensi:
-
-* https://api.flutter.dev/flutter/widgets/Image-class.html
-
 
 ---
 

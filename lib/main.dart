@@ -10,17 +10,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Contoh Gambar',
+      title: 'Contoh FONT',
       theme: ThemeData(
         primaryColor: Colors.blue,
       ),
-      home: const FotoGambar(),
+      home: const HurufFont(),
     );
   }
 }
 
-class FotoGambar extends StatelessWidget {
-  const FotoGambar({Key? key}) : super(key: key);
+class HurufFont extends StatelessWidget {
+  const HurufFont({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,16 +30,12 @@ class FotoGambar extends StatelessWidget {
         ),
         body: Column(
           children: [
-            Image.network(
-              'https://picsum.photos/200/300',
-              width: 200,
-              height: 200,
-            ),
-            const SizedBox(height: 30),
-            Image.asset(
-              "images/android.png",
-              width: 200,
-              height: 200,
+            Text(
+              'Contoh Isi Text',
+              style: TextStyle(
+                fontFamily: 'Oswald',
+                fontSize: 30,
+              ),
             ),
           ],
         ));
