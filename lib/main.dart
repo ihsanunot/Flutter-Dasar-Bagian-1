@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-// import 'widget/listview_basic.dart';
-// import 'widget/listview_dinamik.dart';
-// import 'widget/listview_builder.dart';
-import 'widget/listview_separator.dart';
+// import './widget/expand_pelangi.dart';
+import './widget/flexible_expanded.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,10 +14,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Expanded & Flexible',
       theme: ThemeData(
-        fontFamily: 'Oswald', // custom font
+        fontFamily: 'Oswald',
         primaryColor: Colors.blue,
       ),
-      home: const ListViewSeparator(), // import widget ListView.builder
+      home: const ExpandedFlexibleWidget(),
     );
   }
 }
