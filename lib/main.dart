@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+// import 'widget/listview_basic.dart';
+// import 'widget/listview_dinamik.dart';
+// import 'widget/listview_builder.dart';
+import 'widget/listview_separator.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,36 +14,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Contoh FONT',
+      title: 'Expanded & Flexible',
       theme: ThemeData(
+        fontFamily: 'Oswald', // custom font
         primaryColor: Colors.blue,
       ),
-      home: const HurufFont(),
+      home: const ListViewSeparator(), // import widget ListView.builder
     );
   }
 }
-
-class HurufFont extends StatelessWidget {
-  const HurufFont({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text('Contoh Gambar'),
-        ),
-        body: Column(
-          children: [
-            Text(
-              'Contoh Isi Text',
-              style: TextStyle(
-                fontFamily: 'Oswald',
-                fontSize: 30,
-              ),
-            ),
-          ],
-        ));
-  }
-}
-
-// route nya url/ lokasi aset pakai string

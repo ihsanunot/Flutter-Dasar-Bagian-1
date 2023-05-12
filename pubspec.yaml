@@ -19,12 +19,11 @@ flutter:
   uses-material-design: true
   assets :
     - images/
- #  - images/android.png
 
   fonts:
-  - family: Oswald
-    fonts:
-      - asset: fonts/Oswald/Oswald-Regular.ttf
+    - family: Oswald
+      fonts:
+        - asset: fonts/Oswald-Regular.ttf
 
-# untuk daftar folder images/ biar gak satu persatu kita daftarin gambar yang ingin kita masukan.
+
 # hati hati soal indentasi nya
