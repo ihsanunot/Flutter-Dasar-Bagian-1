@@ -2,127 +2,171 @@
 
 Belajar flutter sederhana basic to basic.
 
-## Navigation
+## Responsive Layout
 
-Navigation adalah claas untuk berpindah dari satu screen ke screen lain.
+Bagaimana mengimplementasikan layout yang responsif? ada 3 jenis Class, yaitu :
+- MediaQuery
+- LayoutBuilder
+- Rensponsive
 
-Konsep Navigation :
+**MediaQuery**
 
-Ketika berpindah screen/activity akan menjadi tumpukan (stack). 
-Jadi ketika berpindah dari satu screen ke screen lain (push), maka screen pertama akan ditumpuk oleh screen kedua. 
-
-Kemudian apabila kembali dari screen kedua ke pertama, maka screen kedua akan dihapus (pop).
-
-* Navigator.push 
-
-Untuk berpindah ke screen kedua kita akan menggunakan sebuah method **Navigator.push**
-
+MediaQuery adalah kelas yang dapat kita gunakan untuk mendapatkan ukuran dan juga orientasi layar.
 
 ```
-Navigator.push(context, MaterialPageRoute(builder: (context) {
-   return WidgetScreen();
-}));
-```
-
-Pada kode di atas Navigator.push memiliki dua parameter. Pertama ialah context dan yang kedua Route. Parameter context ini merupakan variabel BuildContext yang ada pada method build. 
-
-Parameter route berguna untuk menentukan tujuan ke mana kita akan berpindah screen. Route tersebut kita isikan dengan MaterialPageRoute yang di dalamnya terdapat builder yang nantinya akan diisi dengan tujuan screen-nya. 
-
-Maka untuk melakukan perpindahan screen kita akan membuat event onPressed pada tombol ElevatedButton yang ada pada screen pertama:
-
-```
-child: ElevatedButton(
-          child: const Text('Pindah Screen'),
-          onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return const SecondScreen();
-            }));
-```
-
-* Navigator.pop
-
-Setelah dapat berpindah ke screen lain maka kita akan belajar menggunakan Navigator.pop untuk kembali ke screen sebelumnya.
-
-```
-Navigator.pop(context)
-```
-
-Untuk kembali dari screen kedua kita dapat menambahkan event onPressed pada OutlinedButton yang ada pada screen kedua dan kita masukkan Navigator.pop pada event, seperti berikut:
-
-```
-body: Center(
-        child: OutlinedButton(
-          child: const Text('Kembali'),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-```
-
-### Mengirimkan Data Antar Halaman
-
-Seringkali beberapa halaman pada aplikasi perlu saling berinteraksi dengan berbagi dan saling mengirimkan data. 
-
-Pada Flutter kita memanfaatkan constructor dari sebuah class untuk mengirimkan data antar halaman.
-
-```
-final String message = 'Hello from First Screen!';
-```
-Untuk mengirimkan variabel message tersebut ke Second Screen, maka kita akan mengirimkannya sebagai parameter dari constructor kelas SecondScreen seperti berikut:
-
-```
-onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => SecondScreen(message)));
-          },
-```
-
-Agar Second Screen bisa menerima data tersebut, 
-maka kita perlu mengubah default constructor-nya dan menambahkan variabel untuk menampung datanya
-
-```
-class SecondScreen extends StatelessWidget {
-  final String message;
- 
-  const SecondScreen(this.message, {Key? key}) : super(key: key);
-}
-```
-
-Kemudian kita dapat menampilkan data yang diterima melalui variabel yang kita buat.
-
-```
-class SecondScreen extends StatelessWidget {
-  final String message;
- 
-  const SecondScreen(this.message, {Key? key}) : super(key: key);
+class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
  
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+    Orientation orientation = MediaQuery.of(context).orientation;
+ 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Second Screen'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(message),
-            OutlinedButton(
-              child: const Text('Kembali'),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        ),
+      backgroundColor: Colors.blueGrey,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(
+            'Screen width: ${screenSize.width.toStringAsFixed(2)}',
+            style: const TextStyle(color: Colors.white, fontSize: 18),
+            textAlign: TextAlign.center,
+          ),
+          Text(
+            'Orientation: $orientation',
+            style: const TextStyle(color: Colors.white, fontSize: 18),
+            textAlign: TextAlign.center,
+          ),
+        ],
       ),
     );
   }
 }
 ```
 
-Referensi:
-* https://flutter.dev/docs/cookbook/navigation
+**LayoutBuilder**
+
+Cara lain yang bisa kita gunakan adalah dengan widget LayoutBuilder. 
+
+Perbedaan umum antara MediaQuery dan Layout Builder adalah MediaQuery akan mengembalikan ukuran layar yang digunakan, sedangkan LayoutBuilder mengembalikan ukuran maksimum dari widget tertentu.
+
+```
+class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
+ 
+  @override
+  Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+ 
+    return Scaffold(
+      backgroundColor: Colors.blueGrey,
+      body: Row(
+        children: [
+          Expanded(
+            child: LayoutBuilder(
+              builder: (BuildContext context, BoxConstraints constraints) {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text(
+                      'MediaQuery: ${screenSize.width.toStringAsFixed(2)}',
+                      style: const TextStyle(color: Colors.white, fontSize: 18),
+                      textAlign: TextAlign.center,
+                    ),
+                    Text(
+                      'LayoutBuilder: ${constraints.maxWidth}',
+                      style: const TextStyle(color: Colors.white, fontSize: 18),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                );
+              },
+            ),
+          ),
+          Expanded(
+            flex: 3,
+            child: LayoutBuilder(
+              builder: (BuildContext context, BoxConstraints constraints) {
+                return Container(
+                  color: Colors.white,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Text(
+                        'MediaQuery: ${screenSize.width.toStringAsFixed(2)}',
+                        style: const TextStyle(color: Colors.blueGrey, fontSize: 18),
+                        textAlign: TextAlign.center,
+                      ),
+                      Text(
+                        'LayoutBuilder: ${constraints.maxWidth}',
+                        style: const TextStyle(color: Colors.blueGrey, fontSize: 18),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+```
+
+**Rensponsive Design**
+Dalam responsive design, terdapat breakpoint yang merupakan “titik” di mana layout akan beradaptasi untuk memberikan pengalaman pengguna sebaik mungkin.
+
+```
+class ResponsivePage extends StatelessWidget {
+  const ResponsivePage({Key? key}) : super(key: key);
+ 
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          if (constraints.maxWidth < 600) {
+            return ListView(
+              children: _generateContainers(),
+            );
+          } else if (constraints.maxWidth < 900) {
+            return GridView.count(
+              crossAxisCount: 2,
+              children: _generateContainers(),
+            );
+          } else {
+            return GridView.count(
+              crossAxisCount: 6,
+              children: _generateContainers(),
+            );
+          }
+        },
+      ),
+    );
+  }
+ 
+  List<Widget> _generateContainers() {
+    return List<Widget>.generate(20, (index) {
+      return Container(
+        margin: const EdgeInsets.all(8),
+        color: Colors.blueGrey,
+        height: 200,
+      );
+    });
+  }
+}
+```
+
+**Referensi :**
+
+* https://api.flutter.dev/flutter/widgets/MediaQuery-class.html
+* https://api.flutter.dev/flutter/widgets/LayoutBuilder-class.html
 
 ---
 
