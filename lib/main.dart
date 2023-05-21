@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'widget/media_query.dart';
-// import 'widget/layout_builder.dart';
-import 'widget/rensponsive_design.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +15,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Oswald',
         primaryColor: Colors.blue,
       ),
-      home: const ResponsivePage(),
+      home: const Text('Isi disini'),
     );
   }
 }
