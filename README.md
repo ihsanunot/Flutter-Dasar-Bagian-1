@@ -1,5 +1,8 @@
 # Belajar Dasar Flutter (Bagian 2)
 
+Kalau ada error pakai file zip nya yang **widget** 
+di ekstrak terus taruh di lib/widget atau buat folder baru aja di lib nya dengan nama widget, terima kasih.
+
 **WAJIB RUN PAKAI SINTAKS DI TERMINAL**
 
 Cara Running di Chrome:
