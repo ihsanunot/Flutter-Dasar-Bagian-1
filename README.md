@@ -28,11 +28,8 @@ Run > Start Debugging (atau tekan F5)
 
 - Tinggal ketik di terminal :
 
-> flutter config --enable-web
-
-> flutter create .
-
 > flutter run -d chrome
+
 
 *sintaks diatas jika anda pakai vscode*
 
