@@ -16,6 +16,8 @@ Untuk Menhindari Error ini :
 
 jadi biasakan run pakai terminal, jika pakai VSCode.
 
+**Cek class nya di folder lib/widget, import widget ke main.dart** 
+
 ## Navigation & Routing
 
 Di dalam Flutter, screen atau halaman juga dikenal dengan istilah routes. Kembali lagi pada tagline “everything is a widget”, begitu pula dengan routes.
