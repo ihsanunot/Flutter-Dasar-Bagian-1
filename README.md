@@ -13,16 +13,10 @@ Flutter Basic untuk Pemula, Silahkan Cek **Branch** nya untuk contoh koding dan 
 - Jdk & Jre
 - Visual Studio Code
 
-
-## Untuk Jalanin nya :
-- Status Bar kanan pojok bawah
-- pilih perangkat area device selector
-- Jika no device bisa buka emulator nya dulu
-- Aktifkan Command line :
-Run > Start Debugging (atau tekan F5)
-- Tunggu Proses selesai
-- Setelah selesai maka langsung muncul kode starter nya flutter
-- atau bisa juga ketik *flutter create* di terminal
+**Nanti tinggal pilih Device yang aktif aja, seperti :**
+- Chrome
+- Windows 64
+- Samsung S23 (Android Emulator)
 
 ### Untuk Jalanin di Web/Browser
 
@@ -37,10 +31,10 @@ Flutter Web :
 - HTML renderer
 - CanvasKit renderer
 
-Bisa juga kalau mau pilih secara spesifik:
+**Bisa juga kalau mau pilih secara spesifik:**
 
-flutter run -d chrome --web-renderer html
-flutter run -d chrome --web-renderer canvaskit
+- flutter run -d chrome --web-renderer html
+- flutter run -d chrome --web-renderer canvaskit
 
 ---
 
