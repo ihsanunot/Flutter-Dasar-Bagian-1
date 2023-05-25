@@ -7,6 +7,8 @@
 ```
 flutter run -d chrome --web-renderer html
 ```
+![1](https://github.com/ihsanunot/Flutter-Dasar-Bagian-1/assets/127992374/1f7d026f-eaef-4958-81df-fc43bde9ccc7)
+![2](https://github.com/ihsanunot/Flutter-Dasar-Bagian-1/assets/127992374/48290a75-1e32-4523-b40a-3917081772b0)
 
 ## Slivers
 
