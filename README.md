@@ -1,53 +1,70 @@
 # Belajar Dasar Flutter (Bagian 2)
 
-Kalau ada error pakai file zip nya yang **widget** 
-di ekstrak terus taruh di lib/widget atau buat folder baru aja di lib nya dengan nama widget, terima kasih.
-
 **WAJIB RUN PAKAI SINTAKS DI TERMINAL**
 
-Cara Running di Chrome:
+*Cara Running di Chrome:*
 
 ```
 flutter run -d chrome --web-renderer html
 ```
 
-Untuk Menhindari Error ini :
+## Slivers
 
-- error [object ProgressEvent]
-- Image provider: (.....)
-- Image key: (.....)
+Slivers adalah sebagian area yang dapat di-scroll.
 
-jadi biasakan run pakai terminal, jika pakai VSCode.
+Lalu apa beda nya dengan  widget scrolling seperti ListView dan GridView?  
 
-**Cek class nya di folder lib/widget, import widget ke main.dart** 
+**Slivers hanya digunakan pada kasus-kasus tertentu.**
 
-## Navigation & Routing
+Jika tampilan scrolling cukup sederhana, cukup gunakan ListView dan GridView saja.
 
-Di dalam Flutter, screen atau halaman juga dikenal dengan istilah routes. Kembali lagi pada tagline “everything is a widget”, begitu pula dengan routes.
+**Slivers**
 
-> navigasi antar route secara dasar menggunakan Navigator.push dan Navigator.pop.
-<br>
+Slivers sendiri adalah konfigurasi yang lebih low-level untuk widget scrolling. 
 
-Konsep navigasi pada Flutter adalah ketika berpindah screen/activity akan menjadi **tumpukan (stack).** 
+Ini memungkinkan kita melakukan kustomisasi terhadap scrolling yang lebih kompleks.
 
 
-*Jadi ketika berpindah ke screen lain (push), maka screen pertama akan ditumpuk oleh screen kedua.*
+Ok untuk testing siapkan saja 2 foto seperti foto profil atau banner
 
+Buatlah folder baru bernama assets dan letakkan aset gambar ke dalam folder tersebut. 
 
-Kemudian apabila kembali dari screen kedua ke pertama, maka screen kedua akan dihapus (pop).
+Jangan lupa untuk mendaftarkan aset ke dalam project melalui berkas pubspec.yaml.
 
-### Route
+```
+flutter:
+  uses-material-design: true
+ 
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/
+```
+Selanjutnya buat berkas baru bernama strings.dart. Di sini kita akan menyimpan konten teks yang akan kita tampilkan.
 
-**Pakai route** ini berguna jika kita memerlukan navigasi ke banyak halaman yang bisa memicu duplikasi code, maka dari itu solusi nya pakai route.
+```
+const contentText =
+    'Google officially announced its much-anticipated Pixel phones; the Pixel and Pixel XL, on October 4. We attended Google’s London UK event, mirroring the main one taking place in San Francisco, US, where the firm unwrapped the new Android 7.1 Nougat devices which will apparently usurp Google’s long-standing Nexus series.';
+const contentSpecsDisplay =
+    "5.0 inches\nFHD AMOLED at 441ppi\n2.5D Corning® Gorilla® Glass 4";
+const contentSpecsSize =
+    '5.6 x 2.7 x 0.2 ~ 0.3 inches 143.8 x 69.5 x 7.3 ~ 8.5 mm';
+const contentSpecsBattery =
+    "2,770 mAh battery\nStandby time (LTE): up to 19 days\nTalk time (3g/WCDMA): up to 26 hours\nInternet use time (Wi-Fi): up to 13 hours\nInternet use time (LTE): up to 13 hours\nVideo playback: up to 13 hours\nAudio playback (via headset): up to 110 hours\nFast charging: up to 7 hours of use from only 15 minutes of charging";
+```
 
-Konsep named route ini mirip dengan sebuah website di mana memiliki route atau endpoint untuk merujuk ke suatu halaman, **contohnya seperti /login atau /detail.**
+Selanjutnya, kita mulai mengerjakan tampilan widget utama dengan membuat berkas pixel_page.dart.
 
-Mari bikin beberapa Screen dengan ElevatedButton
-dan MainAxis center.
-
-> Selanjutnya untuk mendefinisikan route temukan widget MaterialApp lalu tambahkan properti initialRoute dan routes.
-
-**Contoh :**
+```
+class PixelPage extends StatelessWidget {
+  const PixelPage({Key? key}) : super(key: key);
+ 
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold();
+  }
+}
+```
+Jangan lupa untuk menambahkan PixelPage ke dalam widget utama MyApp
 
 ```
 class MyApp extends StatelessWidget {
@@ -56,262 +73,250 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Google Pixel',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => const FirstScreen(),
-        '/secondScreen': (context) => const SecondScreen(),
-        '/secondScreenWithData': (context) => SecondScreenWithData(
-            ModalRoute.of(context)?.settings.arguments as String),
-        '/returnDataScreen': (context) => const ReturnDataScreen(),
-        '/replacementScreen': (context) => const ReplacementScreen(),
-        '/anotherScreen': (context) => const AnotherScreen(),
-      },
+      home: const PixelPage(),
     );
   }
 }
 ```
 
-> Jika Anda menggunakan initialRoute, pastikan Anda tidak menggunakan properti home.
-
-Nanti juga di visualdensity class untuk beberapa optimasi agar lebih rapih.
-
-visualdensity tidak akan memengaruhi ukuran teks, ukuran ikon, atau nilai padding.
-
-**Tapi, ada beberapa Widget yang bisa kita pengaruhin :**
-
-- Checkbox
-- Chip
-- ElevatedButton
-- IconButton
-- InputDecorator (which gives density support to TextField, etc.)
-- ListTile
-- MaterialButton
-- OutlinedButton
-- Radio
-- RawMaterialButton
-- TextButton
-
-
-
-# Normal Navigation
-
-Untuk melakukan navigasi ke route, Anda dapat memanggil method Navigator.pushNamed dengan dua parameter yaitu context dan nama route yang ingin dituju
-
-## Contoh Normal Navigation
-
-### Ke Halaman kedua
-```
-ElevatedButton(
-  child: Text('Go to Second Screen'),
-  onPressed: () {
-    Navigator.pushNamed(context, '/secondScreen');
-  },
-),
-```
-
-### Back ke sebelumnya
-
-Untuk kembali ke halaman sebelumnya caranya masih sama, yaitu menggunakan Navigator.pop.
+Sekarang ingat bahwa Slivers adalah sebagian area yang dapat di-scroll. Dalam hal ini ada dua bagian yang bisa di-scroll, yaitu AppBar dan konten utamanya. Kali ini kita menggunakan widget NestedScrollView untuk memasukkan widget scrolling ke dalam widget scrolling lain. Widget ini akan memberikan efek collapsingpada AppBar.
 
 ```
-ElevatedButton(
-          child: const Text('Back'),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-),
-```
-
-# Navigation with data
-Jika kita ingin mengirimkan data ke sebuah halaman cukup menambahkan satu parameter atau properti lagi pada method pushNamed bernama **arguments**.
-
-Untuk mendapatkan argumen yang dikirimkan pada route tujuan kita menggunakan method **ModalRoute.of()**
-
-**Contoh:**
-```
-ElevatedButton(
-  child: Text('Navigation with Data'),
-  onPressed: () {
-    Navigator.pushNamed(context, '/secondScreenWithData', arguments: 'Hello from First Screen!');
-  },
-),
-```
-
-## Return data from a screen
-
-Dalam beberapa kasus, Anda mungkin ingin mengembalikan data dari halaman baru. 
-
-Misalnya, setelah pengguna memberikan sebuah input, Anda ingin mengolahnya di halaman sebelumnya. 
-
-Method Navigator.pop() selain untuk menutup halaman juga berguna untuk mengembalikan nilai.
-
-contoh kita buat halaman dengan TextField dan Button.
-
-```
-class _ReturnDataScreenState extends State<ReturnDataScreen> {
-  final _textController = TextEditingController();
- 
+class PixelPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: TextField(
-                controller: _textController,
-                decoration: const InputDecoration(labelText: 'Enter your name'),
-              ),
-            ),
-            ElevatedButton(
-              child: const Text('Send'),
-              onPressed: () {
-                Navigator.pop(context, _textController.text);
-              },
-            ),
-          ],
-        ),
-      ),
+      body: NestedScrollView(headerSliverBuilder: null, body: null),
     );
   }
- 
-  @override
-  void dispose() {
-    _textController.dispose();
-    super.dispose();
-  }
 }
- 
 ```
 
-Selanjutnya kita akan mengembalikan nilai dari input pengguna.
+Widget ini memerlukan dua parameter wajib yaitu headerSliverBuilder dan body.
+
+Parameter pertama akan kita isi dengan Appbar. Untuk mendapatkan efek scrolling pada AppBar, maka kita gunakan widget SliverAppBar. Widget ini sama seperti AppBar yang biasa kita gunakan. Bedanya, widget ini memiliki parameter expandedHeight yang bisa kita isi dengan ukuran maksimal dari AppBar. Jika di-scrollukuran AppBar tersebut akan mengecil.
 
 ```
-onPressed: () {
-  Navigator.pop(context, _textController.text);
+headerSliverBuilder: (context, isScrolled) {
+  return [
+    SliverAppBar(
+      expandedHeight: 200,
+    ),
+  ];
 },
 ```
 
-Kembali ke FirstScreen, kita akan membuat Navigasi untuk menuju ke ReturnDataScreen. 
+AppBar bisa menghilang ketika di-scroll. Bagaimana agar AppBar tetap tampil seperti tampilan default-nya. Anda dapat menambahkan parameter pinned yang bernilai true.
 
-Jika Anda perhatikan, method untuk push pada navigation ini sebenarnya merupakan **objek Future**. 
-
-Artinya, metode ini bisa mengembalikan nilai di masa depan.
-
-Oleh karena itu, kita dapat menyimpan nilainya ke dalam suatu variabel. **Jangan lupa untuk menggunakan async dan await untuk menunggu nilai yang dikembalikan**
-
-
-Jika anda perhatikan property push sendiri yang di navigator sebenarnya adalah Objek Future, Artinya, metode ini bisa mengembalikan nilai di masa depan.
-
-Oleh karena itu, kita dapat menyimpan nilainya ke dalam suatu variabel. 
-Jangan lupa untuk menggunakan async dan await untuk menunggu nilai yang dikembalikan
-
-**Contoh** di main.dart nya:
 ```
-ElevatedButton(
-              child: const Text('Return Data from Another Screen'),
-              onPressed: () async {
-                final scaffoldMessenger = ScaffoldMessenger.of(context);
-                final result =
-                    await Navigator.pushNamed(context, '/returnDataScreen');
-                SnackBar snackBar = SnackBar(content: Text('$result'));
-                scaffoldMessenger.showSnackBar(snackBar);
-              },
-            ),
-```
-
-## Replace Screen
-
-Kita telah membahas bahwa navigasi pada Flutter membuat halaman menjadi bertumpuk (stacked). 
-
-Namun, Anda juga memiliki opsi untuk membuat halaman baru dengan menggantikan stack yang sedang terbuka. 
-
-Cara ini umum digunakan pada halaman seperti splash screen atau login di mana pengguna tidak perlu kembali ke halaman tersebut ketika menekan tombol back.
-
-Caranya, gunakan metode pushReplacement atau pushReplacementNamed jika Anda menggunakan named routes.
-
-**Contoh:**
-```
-ElevatedButton(
-  child: Text('Replace Screen'),
-  onPressed: () {
-   Navigator.pushNamed(context, '/replacementScreen');
-  },
+SliverAppBar(
+  pinned: true,
+  expandedHeight: 200,
 ),
- 
-... 
- 
-/// replacement_screen.dart
-class ReplacementScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: ElevatedButton(
-          child: const Text('Open Another Screen'),
-          onPressed: () {
-            Navigator.pushReplacementNamed(context, '/anotherScreen');
-          },
-        ),
-      ),
-    );
-  }
-}
 ```
 
-Halaman AnotherScreen akan me-replace stack dari ReplacementScreen. 
-
-Sehinga, ketika pengguna keluar dari AnotherScreen akan langsung diarahkan ke FirstScreen.
+Kemudian kita tambahkan parameter flexibleSpace dengan widget FlexibleSpaceBar. Widget ini akan menampilkan antarmuka pengguna untuk AppBar.
 
 ```
-class AnotherScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text('Back to First Screen'),
-            ElevatedButton(
-              child: const Text('Back'),
+SliverAppBar(
+  pinned: true,
+  expandedHeight: 200,
+  flexibleSpace: FlexibleSpaceBar(
+    background: Image.asset(
+      'assets/pixel_google.jpg',
+      fit: BoxFit.fitWidth,
+    ),
+    title: const Text('Google Pixel'),
+    titlePadding: const EdgeInsets.only(left: 16, bottom: 16),
+  ),
+),
+```
+
+Sekarang tambahkan konten utama pada parameter body
+
+```
+import 'package:new_project_flutter/strings.dart';
+...
+ 
+NestedScrollView(
+  headerSliverBuilder: (context, isScrolled) {
+    ...
+  },
+  body: SingleChildScrollView(
+    child: Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                r'$735',
+                style: Theme.of(context).textTheme.headline4,
+              ),
+              Container(
+                color: Colors.black26,
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: const [
+                    Icon(
+                      Icons.collections,
+                      color: Colors.white,
+                    ),
+                    Text(
+                      '6 photos',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'Stock hanya 5 buah',
+            style: Theme.of(context).textTheme.caption,
+          ),
+          const SizedBox(height: 8),
+          const Text(contentText),
+          const SizedBox(height: 8),
+          Text(
+            'Spesifikasi',
+            style: Theme.of(context).textTheme.subtitle1,
+          ),
+          const SizedBox(height: 8),
+          Table(
+            columnWidths: const {1: FractionColumnWidth(0.7)},
+            children: const [
+              TableRow(
+                children: [
+                  Text('Display'),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 4),
+                    child: Text(contentSpecsDisplay),
+                  ),
+                ],
+              ),
+              TableRow(
+                children: [
+                  Text('Size'),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 4),
+                    child: Text(contentSpecsSize),
+                  ),
+                ],
+              ),
+              TableRow(
+                children: [
+                  Text('Battery'),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 4),
+                    child: Text(contentSpecsBattery),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          Text(
+            'Dijual oleh',
+            style: Theme.of(context).textTheme.subtitle1,
+          ),
+          Row(
+            children: const [
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: CircleAvatar(
+                  backgroundImage: AssetImage('assets/photo_2.jpg'),
+                  radius: 24,
+                ),
+              ),
+              Text('Narenda Wicaksono'),
+            ],
+          ),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Theme.of(context).primaryColor,
+                foregroundColor: Colors.white,
+                shape: const BeveledRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(8),
+                  ),
+                ),
+              ),
               onPressed: () {
-                Navigator.pop(context);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Added to Cart'),
+                  ),
+                );
               },
+              child: const Text('Beli'),
             ),
-          ],
-        ),
+          )
+        ],
       ),
-    );
-  }
-}
+    ),
+  ),
+),
 ```
 
+Susunan widget di atas tidak jauh berbeda dengan susunan widget pada umumnya. Namun, kita akan membahas widget yang baru pertama kita gunakan, yaitu Table. Sesuai namanya, widget ini digunakan untuk menyusun widget lain sebagai tabel. Anda mendefinisikan baris tabel dengan widget TableRow lalu children-nya sebagai kolom.
+
+```
+Table(
+  columnWidths: const {1: FractionColumnWidth(0.7)},
+  children: const [
+    TableRow(
+      children: [
+        Text('Display'),
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 4),
+          child: Text(contentSpecsDisplay),
+        ),
+      ],
+    ),
+    TableRow(
+      children: [
+        Text('Size'),
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 4),
+          child: Text(contentSpecsSize),
+        ),
+      ],
+    ),
+    TableRow(
+      children: [
+        Text('Battery'),
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 4),
+          child: Text(contentSpecsBattery),
+        ),
+      ],
+    ),
+  ],
+),
+```
+
+Parameter columnWidths digunakan untuk menentukan lebar kolom dari tabel.
 
 **Referensi :**
-- https://docs.flutter.dev/ui/navigation
-- https://www.geeksforgeeks.org/flutter-dispose-method-with-example/
-- https://stackoverflow.com/questions/54480937/what-does-context-of-widget-buildbuildcontext-context-mean-in-flutter
+- https://stackoverflow.com/questions/53372276/flutter-how-to-check-if-sliver-appbar-is-expanded-or-collapsed
 
 ---
-
-Cara Running di Chrome:
-
-```
-flutter run -d chrome --web-renderer html
-```
-
-
-```
 Dart SDK version: 3.0.1 (stable)
 Flutter 3.10.1 • channel stable  • DevTools 2.23.1
 Java 20.0.1Java(TM) SE Runtime Environment (build 20.0.1+9-29) 
+
 ```
-**Ihsanunot (flutter_dasar_dcg)**
+Ihsanunot (flutter_dasar_dcg)
+```
