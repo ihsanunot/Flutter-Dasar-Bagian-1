@@ -1,389 +1,361 @@
-# SliverList & SliverGrid
+# Cupertino
 
-Kita juga bisa memanfaatkan widget Sliver untuk membuat efek scrolling.
+Flutter merupakan framework yang multiplatform. 
 
-* Implementasi SliverList
-* Implementasi SliverGrid
+Meskipun Material design dirancang untuk banyak platform juga, tentunya kita ingin pengguna perangkat iOS merasa berada di “rumah” dengan menerapkan style yang umum digunakan pada aplikasi iOS.
 
-Mari kita test dengan projek baru, terus buat file academy.dart yang isi nya :
+Perlukah bikin 2 kode yang berbeda untuk UI android dan iOS?
+Hmm bisa Iya bisa Tidak, jika anda ingin bener2 bikin seperti Native maka bisa 2 kali.
+
+Tetapi karena dart bersifat logika bisnis yang dapat dipakai di kedua platform.
+
+Anda bisa saja cukup dengan 1 code aja karena di Docs nya anda tetap bisa mengunakan Material Design di perangkat iOS.
+
+Selain itu ada beberapa widget yang bersifat adaptif tergantung platform yang digunakan.
+
+---
+
+## Coding Phase
+
+Anda bisa langsung coba ganti isi main.dart nya :
 
 ```
-class Academy {
-  final String title;
-  final String description;
+import 'package:flutter/cupertino.dart';
  
-  Academy({
-    required this.title,
-    required this.description,
-  });
-}
-```
-
-Kali ini kita pakai Data Statis Lagi jadi bisa anda salin dulu data dibawah ini (agak panjang ini) taruh di bawah class academy.
-
-```
-/*  -- DATA STATIS -- */
-
-final List<Academy> androidPaths = [
-  Academy(
-    title: 'Memulai Pemrograman Dengan Kotlin',
-    description:
-        'Langkah pertama untuk menjadi seorang Android Developer dengan mempelajari bahasa yang direkomendasikan oleh Google.',
-  ),
-  Academy(
-    title: 'Belajar Membuat Aplikasi Android untuk Pemula',
-    description:
-        'Buat aplikasi pertamamu dengan memahami dasar-dasar membuat tampilan dan logika aplikasi.',
-  ),
-  Academy(
-    title: 'Belajar Fundamental Aplikasi Android',
-    description:
-        'Perdalam keahlianmu di dunia pemrograman Android dengan mempelajari cara membuat aplikasi yang dapat mengambil data dari server dan menyimpannya ke dalam database.',
-  ),
-  Academy(
-    title: 'Belajar Pengembangan Aplikasi Android Intermediate',
-    description:
-        'Perdalam keahlian untuk menjadi Associate Android Developer yang fokus pada pengalaman pengguna yang lebih baik.',
-  ),
-  Academy(
-    title: 'Belajar Prinsip Pemrograman SOLID',
-    description:
-        'Memperkaya modal menjadi Android Developer dengan belajar prinsip dasar SOLID.',
-  ),
-  Academy(
-    title: 'Menjadi Android Developer Expert',
-    description:
-        'Jadilah developer expert dengan belajar berbagai macam skill yang diperlukan di dunia industri, termasuk performa dan keamanan aplikasi.',
-  ),
-];
-
-final List<Academy> iosPaths = [
-  Academy(
-    title: 'Memulai Pemrograman Dengan Swift',
-    description:
-        'Langkah pertama untuk menjadi seorang iOS Developer dengan mempelajari bahasa yang direkomendasikan oleh Apple.Inc.',
-  ),
-  Academy(
-    title: 'Belajar Membuat Aplikasi iOS untuk Pemula',
-    description:
-        'Buat aplikasi iOS pertamamu dengan memahami dasar-dasar membuat tampilan dan logika aplikasi.',
-  ),
-  Academy(
-    title: 'Belajar Fundamental Aplikasi iOS',
-    description:
-        'Perdalam keahlianmu di dunia pemrograman iOS dengan mempelajari cara membuat aplikasi yang dapat mengambil data dari server dan menyimpannya ke dalam database.',
-  ),
-  Academy(
-    title: 'Belajar Prinsip Pemrograman SOLID',
-    description:
-        'Memperkaya modal menjadi iOS Developer dengan belajar prinsip dasar SOLID.',
-  ),
-  Academy(
-    title: 'Menjadi iOS Developer Expert',
-    description:
-        'Jadilah iOS Developer Expert dengan belajar berbagai macam skill yang diperlukan di dunia industri.',
-  ),
-];
-
-final List<Academy> flutterPaths = [
-  Academy(
-    title: 'Memulai Pemrograman Dengan Dart',
-    description:
-        'Langkah pertama untuk menjadi seorang Flutter Developer dengan mempelajari bahasa Dart yang digunakan untuk mengembangkan aplikasi dengan Flutter.',
-  ),
-  Academy(
-    title: 'Belajar Membuat Aplikasi Flutter untuk Pemula',
-    description:
-        'Buat aplikasi pertamamu dengan mengenal Flutter dan memahami dasar-dasar membangun tampilan Flutter dengan widget.',
-  ),
-  Academy(
-    title: 'Belajar Fundamental Aplikasi Flutter',
-    description:
-        'Perdalam keahlianmu dalam mengembangkan aplikasi menggunakan Flutter dengan mempelajari cara membuat aplikasi yang dapat mengambil data dari server dan menyimpannya ke dalam database.',
-  ),
-  Academy(
-    title: 'Belajar Prinsip Pemrograman SOLID',
-    description:
-        'Mendalami Object-Oriented Programming (OOP) dengan belajar prinsip dasar SOLID.',
-  ),
-  Academy(
-    title: 'Menjadi Flutter Developer Expert',
-    description:
-        'Pelajari best practice seperti clean architecture, TDD, modularisasi, continuous integration, performance, dan security dalam mengembangkan aplikasi Flutter.',
-  ),
-];
-
-final List<Academy> webPaths = [
-  Academy(
-    title: 'Belajar Dasar Pemrograman Web',
-    description:
-        'Belajar dasar adalah langkah yang tidak boleh dilewatkan untuk mahir di bidang apa pun. Di sini, Anda akan belajar dasar dari HTML, CSS dan JavaScript. sebagai 3 pilar pembentuk website.',
-  ),
-  Academy(
-    title: 'Belajar Membuat Front-End Web untuk Pemula',
-    description:
-        'Pelajari lebih dalam JavaScript, DOM manipulation, dan web storage untuk meningkatkan fungsionalitas dan interaktifitas pada website Anda.',
-  ),
-  Academy(
-    title: 'Belajar Fundamental Front-End Web Development',
-    description:
-        'Agar pengalaman mengembangkan website lebih seru, gunakanlah tools modern seperti Webpack. Selain itu, Anda akan belajar bagaimana menampilkan data dari server sehingga webmu bisa menampilkan data yang dinamis.',
-  ),
-  Academy(
-    title: 'Menjadi Front-End Web Developer Expert',
-    description:
-        'Menjadi seorang expert adalah impian setiap developer. Untuk itu, Anda perlu mempelajari prinsip dan materi expert seperti testing dan performance di sini. Di langkah ini juga, Anda diarahkan untuk membuat web aplikasi yang modern.',
-  ),
-];
-
-```
-
-Siapkan widget untuk menyimpan halaman utama dengan membuat berkas baru bernama **learning_path_page.dart**
-
-```
-/// learning_path_page.dart
-class LearningPathPage extends StatelessWidget {
-  const LearningPathPage({Key? key}) : super(key: key);
- 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Dicoding Learning Paths'),
-      ),
-      body: const LearningPathList(),
-    );
-  }
-}
-```
-
-Lalu Tempatkan LearningPathList ke dalam widget utama MyApp.
-
-```
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
  
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
- 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const LearningPathPage(),
-    );
+    return CupertinoApp();
   }
 }
 ```
+Perhatikan pada kode di atas kita gunakan widget CupertinoApp sebagai widget aplikasi.
 
-Jangan lupa untuk menambahkan LearningPathList ke dalam widget utama MyApp
+Widget CupertinoAppmemiliki parameter yang mirip dengan MaterialApp yang biasa kita gunakan. 
 
-LearningPathList adalah widget yang menampilkan data learning path dan kelas
+Sebagai contoh, Anda dapat mengatur tema aplikasi dan halaman utama yang ingin ditampilkan.
 
 ```
-class LearningPathList extends StatelessWidget {
-  const LearningPathList({Key? key}) : super(key: key);
- 
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: [],
-    );
-  }
-}
-```
-
-Di sini kita akan menggunakan widget CustomScrollView. Widget ini adalah widget ScrollView yang membuat efek custom scroll dengan Slivers. 
-
-Widget ini memiliki parameter slivers yang mirip dengan children. Isi parameter tersebut dengan widget sliver yang ingin ditampilkan.
-
-Sebelum itu, mari kita buat dulu widget yang berperan sebagai header ketika scrolling. 
-
-Di dalam LearningPathList tambahkan fungsi yang akan mengembalikan widget SliverPersistentHeader.
-
-```
-class LearningPathList extends StatelessWidget {
-  SliverPersistentHeader _header(String text) {
-    return SliverPersistentHeader(
-      pinned: true,
-      delegate: null,
-    );
-  }
- 
-  @override
-  Widget build(BuildContext context) {...}
-}
-```
-
-### Delegate
-Parameter delegate harus diisi dengan kelas SliverPersistentHeaderDelegate. Karena kelas ini merupakan abstract class, maka kita perlu membuat kelas implementasinya terlebih dulu.
-
-```
-class SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
- 
-}
-```
-
-Kode akan eror karena ada beberapa implementasi yang perlu ditambahkan. Arahkan kursor ke nama kelas lalu ketik shortcut Alt + Enter (Ctrl + . pada Visual Studio Code), kemudian pilih Create 4 missing override(s).
-
-Sekarang ada beberapa method yang perlu kita isi. Tambahkan dulu beberapa variabel dan buat constructor-nya.
-
-```
-class SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
-  SliverAppBarDelegate({
-    required this.minHeight,
-    required this.maxHeight,
-    required this.child,
-  });
- 
-  final double minHeight;
-  final double maxHeight;
-  final Widget child;
- 
-  ...
-}
-```
-
-Tiga properti ini antara lain ukuran minimal dan maksimal ketika widget mengembang serta widget yang ingin ditampilkan.
-
-Tambahkan ketiga properti tersebut ke dalam override method
-
-```
-@override
-Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
-  return child;
-}
- 
-@override
-double get maxExtent => maxHeight;
- 
- 
-@override
-double get minExtent => minHeight;
-```
-
-Method terakhir berisi apakah widget perlu dibangun ulang. Karena itu lakukan pengecekan apakah terdapat perubahan properti.
-
-```
-@override
-bool shouldRebuild(SliverAppBarDelegate oldDelegate) {
-  return maxHeight != oldDelegate.maxHeight ||
-      minHeight != oldDelegate.minHeight ||
-      child != oldDelegate.child;
-}
-```
-
-Setelah kelas SliverAppBarDelegate siap, kita bisa menggunakannya untuk mengisi parameter delegate pada header.
-
-```
-delegate: SliverAppBarDelegate(
-  minHeight: 60,
-  maxHeight: 150,
-  child: Container(
-    color: Colors.lightBlue,
-    child: Center(
-      child: Text(
-        text,
-        style: const TextStyle(color: Colors.white),
+    return CupertinoApp(
+      theme: CupertinoThemeData(
+        primaryColor: CupertinoColors.systemOrange,
       ),
+      home: HomePage(),
+    );
+  }
+}
+```
+
+Pada komponen halaman kita juga bisa menggunakan widget scaffold seperti pada material. 
+
+Namun, Cupertino memiliki dua jenis scaffold yang bisa digunakan, yaitu 
+
+- CupertinoPageScaffold
+- CupertinoTabScaffold. 
+
+Untuk langkah awal, mari gunakan CupertinoPageScaffold.
+
+CupertinoPageScaffold di sini mirip dengan Scaffold yang biasa digunakan pada material. 
+
+Bedanya, CupertinoPageScaffold tidak mengenal AppBar, melainkan menggunakan widget CupertinoNavigationBar.
+
+```
+class HomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoPageScaffold(
+      navigationBar: CupertinoNavigationBar(
+        middle: Text('Cupertino App'),
+      ),
+      child: Container(),
+    );
+  }
+}
+```
+
+Beberapa widget dapat digunakan bersamaan karena sifatnya yang umum dan tidak ada perbedaan antara gaya material dan cupertino. 
+
+Contohnya adalah tampilan halaman seperti berikut:
+
+```
+class HomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoPageScaffold(
+      navigationBar: CupertinoNavigationBar(
+        middle: Text('Cupertino App'),
+      ),
+      child: Center(
+        child: Text(
+          'Home Page',
+          style: CupertinoTheme.of(context).textTheme.navLargeTitleTextStyle,
+        ),
+      ),
+    );
+  }
+}
+```
+
+Perhatikan widget yang spesifik untuk cupertino selalu diawali dengan Cupertino, misalnya CupertinoTheme untuk mendapatkan tema.
+
+Lalu bagaimana dengan CupertinoTabScaffold? Umumnya widget ini digunakan untuk halaman utama yang memiliki navigasi berupa tab. Mari ubah HomePage menggunakan Tab Scaffold.
+
+```
+class HomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoTabScaffold(
+      tabBar: CupertinoTabBar(...),
+      tabBuilder: (context, index) {...},
+    );
+  }
+}
+```
+
+CupertinoTabScaffold membutuhkan dua parameter wajib. Parameter tabBarberisi widget CupertinoTabBar yang menampilkan item tab.
+
+```
+tabBar: CupertinoTabBar(
+  items: [
+    BottomNavigationBarItem(
+      icon: Icon(CupertinoIcons.news),
+      label: 'Feeds',
     ),
-  ),
+    BottomNavigationBarItem(
+      icon: Icon(CupertinoIcons.search),
+      label: 'Search',
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(CupertinoIcons.settings),
+      label: 'Settings',
+    ),
+  ],
 ),
 ```
 
-Selanjutnya tambahkan header ke dalam **CustomScrollView**
+Parameter tabBuilderberisi fungsi untuk menampilkan halaman berdasarkan indeks tab yang dipilih.
 
 ```
-@override
-Widget build(BuildContext context) {
-  return CustomScrollView(
-    slivers: [
-      _header('Android Developer'),
-    ],
-  );
-}
+tabBuilder: (context, index) {
+  switch (index) {
+    case 0:
+      return FeedsPage();
+    case 1:
+      return SearchPage();
+    case 2:
+      return SettingsPage();
+    default:
+      return Center(
+        child: Text('Page not found!'),
+      );
+  }
+},
 ```
-Kemudian di bawah header merupakan daftar item yang ingin ditampilkan. Parameter slivers hanya boleh diisi dengan widget sliver. Karena itulah kita akan gunakan widget SliverListuntuk menampilkan list.
+
+Sekarang, buatlah masing-masing halaman dengan menggunakan CupertinoPageScaffold.
+
+**search_page.dart**
 
 ```
-slivers: [
-  _header('Android Developer'),
-  SliverList(
-    delegate: SliverChildListDelegate(
-      androidPaths.map(_buildTile).toList(),
-    ),
-  ),
-],
-```
-Tambahkan metode _buildTile()untuk menampilkan setiap item ke dalam ListTile.
-
-```
-Widget _buildTile(Academy academy) {
-    return ListTile(
-      title: Text(academy.title),
-      subtitle: Text(
-        academy.description,
-        overflow: TextOverflow.ellipsis,
-        maxLines: 4,
+class SearchPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoPageScaffold(
+      navigationBar: CupertinoNavigationBar(
+        middle: Text('Search Page'),
+      ),
+      child: Center(
+        child: Text(
+          'Search Page',
+          style: CupertinoTheme.of(context).textTheme.navLargeTitleTextStyle,
+        ),
       ),
     );
   }
-```
-Untuk penggunaan SliverGrid juga mirip. Anda perlu menentukan jumlah grid yang ingin ditampilkan dalam satu baris dan data yang ingin ditampilkan.
-
-```
-slivers: [
-  ...
- 
-  _header('Multi-Platform App Developer'),
-  SliverGrid.count(
-    crossAxisCount: 2,
-    children: flutterPaths.map(_buildTile).toList(),
-  ),
-],
-```
-Lakukan juga langkah yang sama pada kategori learning path lainnya. Sehingga kode method build()Anda akan seperti berikut:
-
-```
-@override
-Widget build(BuildContext context) {
-  return CustomScrollView(
-    slivers: [
-      _header('Android Developer'),
-      SliverList(
-        delegate: SliverChildListDelegate(
-          androidPaths.map(_buildTile).toList(),
-        ),
-      ),
-      _header('iOS Developer'),
-      SliverList(
-        delegate: SliverChildListDelegate(
-          iosPaths.map(_buildTile).toList(),
-        ),
-      ),
-      _header('Multi-Platform App Developer'),
-      SliverGrid.count(
-        crossAxisCount: 2,
-        children: flutterPaths.map(_buildTile).toList(),
-      ),
-      _header('Front-End Web Developer'),
-      SliverGrid.count(
-        crossAxisCount: 2,
-        children: webPaths.map(_buildTile).toList(),
-      )
-    ],
-  );
 }
 ```
 
-Done, tinggal running aja
+**setting_page.dart**
 
-**Ihsanunot** Flutter 3.0
+```
+class SettingPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoPageScaffold(
+      navigationBar: CupertinoNavigationBar(
+        middle: Text('Setting Page'),
+      ),
+      child: Center(
+        child: Text(
+          'Setting Page',
+          style: CupertinoTheme.of(context).textTheme.navLargeTitleTextStyle,
+        ),
+      ),
+    );
+  }
+}
+```
 
+Sekarang mari ubah FeedsPage dengan menambahkan button. Sesuaikan kode menjadi seperti berikut:
 
+```
+class FeedsPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoPageScaffold(
+      navigationBar: CupertinoNavigationBar(
+        middle: Text('Feeds Page'),
+      ),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Feeds Page',
+              style:
+                  CupertinoTheme.of(context).textTheme.navLargeTitleTextStyle,
+            ),
+            SizedBox(height: 8),
+            CupertinoButton.filled(
+              child: Text('Select Category'),
+              onPressed: () {},
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+```
 
+Kita akan tampilkan action sheet ketika button diklik. Action sheet adalah komponen iOS yang memberikan dua atau lebih pilihan terhadap pengguna. Flutter telah menyediakan fungsi untuk menampilkannya. Tambahkan kode berikut di dalam parameter onPressed.
 
+```
+showCupertinoModalPopup(
+    context: context,
+    builder: (context) {
+      return CupertinoActionSheet(
+        title: Text('Select Categories'),
+        actions: [
+          CupertinoActionSheetAction(
+            onPressed: () {
+              Navigator.push(
+                context,
+                CupertinoPageRoute(
+                  builder: (context) => CategoryPage(
+                      selectedCategory: 'Technology'),
+                ),
+              );
+            },
+            child: Text('Technology'),
+          ),
+          CupertinoActionSheetAction(
+            onPressed: () {
+              Navigator.push(
+                context,
+                CupertinoPageRoute(
+                  builder: (context) => CategoryPage(
+                      selectedCategory: 'Business'),
+                ),
+              );
+            },
+            child: Text('Business'),
+          ),
+          CupertinoActionSheetAction(
+            onPressed: () {
+              Navigator.push(
+                context,
+                CupertinoPageRoute(
+                  builder: (context) =>
+                      CategoryPage(selectedCategory: 'Sport'),
+                ),
+              );
+            },
+            child: Text('Sport'),
+          ),
+        ],
+        cancelButton: CupertinoActionSheetAction(
+          child: Text('Close'),
+          onPressed: () => Navigator.pop(context),
+        ),
+      );
+    });
+```
+
+Kode di atas akan eror karena Anda belum memiliki widget CategoryPage. Buat berkas dan halaman baru untuk mengatasi erornya.
+
+```
+class CategoryPage extends StatelessWidget {
+  final String selectedCategory;
+ 
+  CategoryPage({required this.selectedCategory});
+ 
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoPageScaffold(
+      navigationBar: CupertinoNavigationBar(
+        middle: Text('$selectedCategory Page'),
+      ),
+      child: Center(
+        child: Text(
+          '$selectedCategory Page',
+          style: CupertinoTheme.of(context).textTheme.navLargeTitleTextStyle,
+        ),
+      ),
+    );
+  }
+}
+```
+Kemudian ubah juga tampilan SettingsPage dengan menampilkan tombol logout.
+
+```
+class SettingsPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoPageScaffold(
+      navigationBar: CupertinoNavigationBar(
+        middle: Text('Settings Page'),
+      ),
+      child: Center(
+        child: CupertinoButton(
+          child: Text('Log out'),
+          onPressed: () {},
+        ),
+      ),
+    );
+  }
+}
+```
+
+Lalu, panggil fungsi showCupertinoDialog() untuk menampilkan CupertinoAlertDialog ketika tombol diklik. Alert Dialog akan menampilkan dialog untuk memperingatkan pengguna atas sebuah situasi. Anda dapat menambahkan aksi terhadap dialog dengan memanfaatkan widget CupertinoDialogAction.
+
+```
+showCupertinoDialog(
+  context: context,
+  builder: (context) {
+    return CupertinoAlertDialog(
+      title: Text('Are you sure to log out?'),
+      actions: [
+        CupertinoDialogAction(
+          child: Text('No'),
+          onPressed: () => Navigator.pop(context),
+        ),
+        CupertinoDialogAction(
+          child: Text('Yes'),
+          onPressed: () => Navigator.pop(context),
+        ),
+      ],
+    );
+  },
+);
+```
+
+Referensi
+- https://flutter.dev/docs/development/ui/widgets/cupertino.

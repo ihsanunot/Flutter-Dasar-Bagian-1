@@ -1,22 +1,58 @@
-import 'package:flutter/material.dart';
-import 'learning_path_page.dart';
+import 'package:flutter/cupertino.dart';
+import 'search_page.dart';
+import 'setting_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Google Pixel',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+    return CupertinoApp(
+      theme: const CupertinoThemeData(
+        primaryColor: CupertinoColors.systemOrange,
       ),
-      home: const LearningPathPage(),
+      home: HomePage(),
     );
+  }
+}
+
+/* Contoh CupertinoTabScaffold */
+class HomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoTabScaffold(
+        tabBar: CupertinoTabBar(
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.news),
+              label: 'Feeds',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.search),
+              label: 'Search',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.settings),
+              label: 'Settings',
+            ),
+          ],
+        ),
+        //tabBuilder nya buat nampilin halaman berdasarkan indeks tab yg dipilih
+        tabBuilder: (context, index) {
+          switch (index) {
+            case 0:
+              return FeedsPage();
+            case 1:
+              return SearchPage();
+            case 2:
+              return SettingPage();
+            default:
+              return Center(
+                child: Text('Halaman nya Gak ketemu...'),
+              );
+          } // switch
+        });
   }
 }
