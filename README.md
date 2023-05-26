@@ -149,7 +149,7 @@ class LearningPathPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Dicoding Learning Paths'),
+        title: const Text('Ihsan Learning Paths'),
       ),
       body: const LearningPathList(),
     );
