@@ -18,12 +18,12 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets :
-    - images/
+    - assets/
 
-  fonts:
-    - family: Oswald
-      fonts:
-        - asset: fonts/Oswald-Regular.ttf
+  # fonts:
+  #   - family: Oswald
+  #     fonts:
+  #       - asset: fonts/Oswald-Regular.ttf
 
 
 # hati hati soal indentasi nya
