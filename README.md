@@ -1,5 +1,8 @@
 # SliverList & SliverGrid
 
+![ss1](https://github.com/ihsanunot/Flutter-Dasar-Bagian-1/assets/127992374/90b13b89-422a-43f7-bf23-2cfb7da58e9f)
+
+
 Kita juga bisa memanfaatkan widget Sliver untuk membuat efek scrolling.
 
 * Implementasi SliverList
